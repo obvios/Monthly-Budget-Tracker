@@ -2,6 +2,7 @@
 #include "InformationExtractor.h"
 #include <iostream>
 
+
 int main(int argc, char * argv[]) {
 	BudgetDocument budgetDoc = BudgetDocument("./", 
 		"BudgetFile.txt");
