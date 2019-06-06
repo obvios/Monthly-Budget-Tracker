@@ -5,6 +5,7 @@
  */
 #ifndef INFORMATIONEXTRACTOR_H
 #define INFORMATIONEXTRACTOR_H
+#define BUFFERSIZE 4096
 
 #include<Windows.h>
 #include <tchar.h>
@@ -22,7 +23,7 @@ public:
 	double GetTotalValue();
 
 private:
-	const int BUFFERSIZE = 4096;
+	char textBuffer[BUFFERSIZE] = { 0 };
 	double TotalValue = 0.0;
 	bool TextExtracted = false;
 	tesseract::TessBaseAPI tess;
