@@ -24,9 +24,6 @@ public:
 private:
 	double TotalValue = 0.0;
 	bool TextExtracted = false;
-	HANDLE hTempFile = INVALID_HANDLE_VALUE;
-	TCHAR hTempFileNameBuffer[MAX_PATH];
-	TCHAR hTempPathBuffer[MAX_PATH];
 	tesseract::TessBaseAPI tess;
 };
 
