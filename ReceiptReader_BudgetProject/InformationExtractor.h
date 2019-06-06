@@ -22,6 +22,7 @@ public:
 	double GetTotalValue();
 
 private:
+	const int BUFFERSIZE = 4096;
 	double TotalValue = 0.0;
 	bool TextExtracted = false;
 	tesseract::TessBaseAPI tess;
