@@ -30,5 +30,5 @@ private:
 	tesseract::TessBaseAPI tess;
 };
 
-#endif // !INFORMATIONEXTRACTOR_H
+#endif // 
 
