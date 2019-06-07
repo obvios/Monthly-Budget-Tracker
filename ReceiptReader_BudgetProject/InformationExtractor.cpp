@@ -15,7 +15,6 @@
 InformationExtractor::InformationExtractor() {};
 
 //initializes tesseract ocr engine
-//creates the temporary file in the temporary directory.
 bool InformationExtractor::Init(const char * datapath, const char * language) {
 	//initialize tesseract
 	if (this->tess.Init("./tessdata", "eng"))
@@ -33,9 +32,9 @@ bool InformationExtractor::Init(const char * datapath, const char * language) {
 }
 
 //Extracts the text from receipt image.
-//Saves extracted text onto temp file. 
 //sets TextExtracted to true if successful.
 bool InformationExtractor::ExtractText(char const * fileName) {
+	//read file
 	auto pixs = pixRead(fileName);
 	if (!pixs)
 	{
@@ -48,26 +47,43 @@ bool InformationExtractor::ExtractText(char const * fileName) {
 	this->tess.SetImage(pixs);
 	this->tess.Recognize(0);
 
-	//get text
-	const char * result = this->tess.GetUTF8Text();
-
-	//store to buffer
-
-	//delete result pointer
-	delete[] result;
 	//assert text extracted
 	this->TextExtracted = true;
+
+	//get iterator
+	tesseract::ResultIterator * tessIt_ = tess.GetIterator();
+
+	//call ExtractTotalSpent
+	this->ExtractTotalSpent(tessIt_);
+
+	//clean up
+	tess.Clear();
+	pixDestroy(&pixs);
+	delete tessIt_;
+
+	return true;
 }
 
 //Extracts the total amount spent from the text extracted out of the
 //receipt image and adds it to TotalValue. Only works if TextExtracted is true.
 //Resets TextExtracted to False.
-//*****will be testing code initially** Must delete
-bool InformationExtractor::ExtractTotalSpent() {
-	
+bool InformationExtractor::ExtractTotalSpent(tesseract::ResultIterator *it_) {
+	if (this->TextExtracted) {
+		while (it_->Next(tesseract::RIL_TEXTLINE)) {
+			char * line = it_->GetUTF8Text(tesseract::RIL_TEXTLINE);
+			std::string lineStr(line);
+			//analyze line
+		}
+		this->TextExtracted = false;
+		return true;
+	}
+	else {
+		this->TextExtracted = false;
+		return false;
+	}
 }
 
 //destructor closes handle to file and deletes it
 InformationExtractor::~InformationExtractor() {
-	
+	tess.Clear();
 }

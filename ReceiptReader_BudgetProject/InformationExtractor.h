@@ -19,14 +19,13 @@ public:
 	~InformationExtractor();
 	bool Init(const char* datapath = "./tessdata", const char* language = "eng");
 	bool ExtractText(char const *);
-	bool ExtractTotalSpent();
 	double GetTotalValue();
 
 private:
-	char textBuffer[BUFFERSIZE] = { 0 };
 	double TotalValue = 0.0;
 	bool TextExtracted = false;
 	tesseract::TessBaseAPI tess;
+	bool ExtractTotalSpent(tesseract::ResultIterator *it_);
 };
 
 #endif // 
