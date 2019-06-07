@@ -13,7 +13,6 @@ int main(int argc, char * argv[]) {
 		//initialize information extractor
 		infoextractor.Init("./tessdata", "eng");
 		infoextractor.ExtractText("receipt2.jpg");
-		infoextractor.ExtractTotalSpent();
 	}
 	else {
 		std::cout << "could not open file\n";
