@@ -73,6 +73,7 @@ bool InformationExtractor::ExtractTotalSpent(tesseract::ResultIterator *it_) {
 			char * line = it_->GetUTF8Text(tesseract::RIL_TEXTLINE);
 			std::string lineStr(line);
 			//analyze line
+
 		}
 		this->TextExtracted = false;
 		return true;
