@@ -69,11 +69,10 @@ bool InformationExtractor::ExtractText(char const * fileName) {
 //Resets TextExtracted to False.
 bool InformationExtractor::ExtractTotalSpent(tesseract::ResultIterator *it_) {
 	if (this->TextExtracted) {
-		while (it_->Next(tesseract::RIL_TEXTLINE)) {
-			char * line = it_->GetUTF8Text(tesseract::RIL_TEXTLINE);
-			std::string lineStr(line);
-			//analyze line
-
+		while (it_->Next(tesseract::RIL_WORD)) {
+			std::string line(it_->GetUTF8Text(tesseract::RIL_WORD));
+			//analyze word
+			
 		}
 		this->TextExtracted = false;
 		return true;
