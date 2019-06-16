@@ -25,6 +25,8 @@ private:
 	double TotalValue = 0.0;
 	bool TextExtracted = false;
 	tesseract::TessBaseAPI tess;
+	std::vector<double>dollarValuesExtracted;
+	//add function to check if word is a dollar value
 	bool ExtractTotalSpent(tesseract::ResultIterator *it_);
 };
 
