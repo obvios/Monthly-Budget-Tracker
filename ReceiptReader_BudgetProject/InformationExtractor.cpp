@@ -83,7 +83,52 @@ bool InformationExtractor::ExtractTotalSpent(tesseract::ResultIterator *it_) {
 	}
 }
 
-//destructor closes handle to file and deletes it
+//
+bool InformationExtractor::isDollarValue(std::string val) {
+	int i = 0;
+	//case 1
+	if ( val[i] == '$' ) {
+		i++;
+		for (; i < val.size(); i++) {
+			if ( !isdigit(val[i]) && val[i] != '.') {
+				return false;
+			}
+			
+			if (val[i] == '.') {
+				if (!isdigit(val[i + 1]) || !isdigit(val[i + 2])) {
+					return false;
+				}
+				else {
+					return true;
+				}
+			}
+		}
+	}
+	else {
+		if (isdigit(val[i]) ) {
+			i++;
+			for (; i < val.size(); i++) {
+				if (!isdigit(val[i]) && val[i] != '.') {
+					return false;
+				}
+
+				if (val[i] == '.') {
+					if (!isdigit(val[i + 1]) || !isdigit(val[i + 2])) {
+						return false;
+					}
+					else {
+						return true;
+					}
+				}
+			}
+		}
+		else {
+			return false;
+		}
+	}
+}
+
+//clears tess engine
 InformationExtractor::~InformationExtractor() {
 	tess.Clear();
 }
