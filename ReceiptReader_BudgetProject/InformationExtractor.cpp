@@ -67,12 +67,15 @@ bool InformationExtractor::ExtractText(char const * fileName) {
 //Extracts the total amount spent from the text extracted out of the
 //receipt image and adds it to TotalValue. Only works if TextExtracted is true.
 //Resets TextExtracted to False.
+///hasss tteessstttiinnggg
 bool InformationExtractor::ExtractTotalSpent(tesseract::ResultIterator *it_) {
 	if (this->TextExtracted) {
 		while (it_->Next(tesseract::RIL_WORD)) {
 			std::string line(it_->GetUTF8Text(tesseract::RIL_WORD));
 			//analyze word
-			
+			if (this->isDollarValue(line)) {
+				std::cout << line << std::endl;
+			}
 		}
 		this->TextExtracted = false;
 		return true;
@@ -87,8 +90,11 @@ bool InformationExtractor::ExtractTotalSpent(tesseract::ResultIterator *it_) {
 //returns true if it is, else it returns false.
 //currently only limited to values under 1,000.
 //only works with values that have a '$' before or no sign at all
+//tesseract returns characters that are not compatible with isdigit (eg. values not within -1 and 255)
+//must handle these occurences
 bool InformationExtractor::isDollarValue(std::string val) {
 	int i = 0;
+	bool decimalFlag = false;		//to ensure a number has a decimal value
 	//case 1
 	if ( val[i] == '$' ) {
 		i++;
