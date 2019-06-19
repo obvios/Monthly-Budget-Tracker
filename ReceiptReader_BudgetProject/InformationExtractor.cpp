@@ -83,7 +83,10 @@ bool InformationExtractor::ExtractTotalSpent(tesseract::ResultIterator *it_) {
 	}
 }
 
-//
+//checks if string is a dollar value.
+//returns true if it is, else it returns false.
+//currently only limited to values under 1,000.
+//only works with values that have a '$' before or no sign at all
 bool InformationExtractor::isDollarValue(std::string val) {
 	int i = 0;
 	//case 1
