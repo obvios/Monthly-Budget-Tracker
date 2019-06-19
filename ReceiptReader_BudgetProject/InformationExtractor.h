@@ -28,6 +28,7 @@ private:
 	//vector to hold all dollar values extracted from text
 	std::vector<double>dollarValuesExtracted;
 	//private methods used to extract total from receipt
+	bool isValidDigit(char);
 	bool isDollarValue(std::string);
 	double dollarVal_TO_doubleVal(std::string);
 	bool ExtractTotalSpent(tesseract::ResultIterator *it_);
