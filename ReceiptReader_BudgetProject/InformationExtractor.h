@@ -34,5 +34,5 @@ private:
 	bool ExtractTotalSpent(tesseract::ResultIterator *it_);
 };
 
-#endif // 
+#endif 
 

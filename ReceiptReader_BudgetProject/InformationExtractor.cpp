@@ -67,7 +67,7 @@ bool InformationExtractor::ExtractText(char const * fileName) {
 //Extracts the total amount spent from the text extracted out of the
 //receipt image and adds it to TotalValue. Only works if TextExtracted is true.
 //Resets TextExtracted to False.
-///hasss tteessstttiinngggggg
+///hasss tteessstttiinngggg
 bool InformationExtractor::ExtractTotalSpent(tesseract::ResultIterator *it_) {
 	if (this->TextExtracted) {
 		while (it_->Next(tesseract::RIL_WORD)) {
