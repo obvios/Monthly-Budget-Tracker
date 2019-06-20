@@ -90,8 +90,6 @@ bool InformationExtractor::ExtractTotalSpent(tesseract::ResultIterator *it_) {
 //returns true if it is, else it returns false.
 //currently only limited to values under 1,000.
 //only works with values that have a '$' before or no sign at all
-//tesseract returns characters that are not compatible with isdigit (eg. values not within -1 and 255)
-//must handle these occurences
 bool InformationExtractor::isDollarValue(std::string val) {
 	int i = 0;
 	bool decimalFlag = false;		//to ensure a number has a decimal value
@@ -99,37 +97,35 @@ bool InformationExtractor::isDollarValue(std::string val) {
 	if ( val[i] == '$' ) {
 		i++;
 		for (; i < val.size(); i++) {
-			if ( !isdigit(val[i]) && val[i] != '.') {
+			if ( !this->isValidDigit(val[i]) && val[i] != '.') {
 				return false;
 			}
 			
 			if (val[i] == '.') {
-				if (!isdigit(val[i + 1]) || !isdigit(val[i + 2])) {
-					return false;
-				}
-				else {
-					return true;
+				if (this->isValidDigit(val[i + 1]) || this->isValidDigit(val[i + 2])) {
+					decimalFlag = true;
 				}
 			}
 		}
+
+		return decimalFlag;
 	}
 	else {
-		if (isdigit(val[i]) ) {
+		if (this->isValidDigit(val[i]) ) {
 			i++;
 			for (; i < val.size(); i++) {
-				if (!isdigit(val[i]) && val[i] != '.') {
+				if (!this->isValidDigit(val[i]) && val[i] != '.') {
 					return false;
 				}
 
 				if (val[i] == '.') {
-					if (!isdigit(val[i + 1]) || !isdigit(val[i + 2])) {
-						return false;
-					}
-					else {
-						return true;
+					if (this->isValidDigit(val[i + 1]) || this->isValidDigit(val[i + 2])) {
+						decimalFlag = true;
 					}
 				}
 			}
+
+			return decimalFlag;
 		}
 		else {
 			return false;
