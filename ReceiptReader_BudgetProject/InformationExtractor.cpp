@@ -137,6 +137,16 @@ bool InformationExtractor::isDollarValue(std::string val) {
 	}
 }
 
+//ensures that the character is a valid digit.
+bool InformationExtractor::isValidDigit(char val) {
+	if (val + 0 >= -1 && val + 0 <= 255) {
+		return isdigit(val);
+	}
+	else {
+		return false;
+	}
+}
+
 //clears tess engine
 InformationExtractor::~InformationExtractor() {
 	tess.Clear();
