@@ -12,7 +12,7 @@ int main(int argc, char * argv[]) {
 		//initialized
 		//initialize information extractor
 		infoextractor.Init("./tessdata", "eng");
-		infoextractor.ExtractText("receipt2.jpg");
+		infoextractor.ExtractText("receipt1.jpg");
 	}
 	else {
 		std::cout << "could not open file\n";
