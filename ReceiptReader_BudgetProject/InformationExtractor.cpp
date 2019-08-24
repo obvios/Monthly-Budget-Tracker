@@ -104,7 +104,7 @@ bool InformationExtractor::isDollarValue(std::string val) {
 			if (val[i] == '.') {
 				//validate the two following characters. Currency after "." is typically in format ".13", meaning only two digits to represent cents
 				//must also ensure we do not go out of bounds
-				if ( ( (i + 1) < val.size() ) && ( (i + 2) < val.size() ) ) {
+				if ( ( (i + 1) < val.size() ) && ( (i + 2) < val.size() ) && ( (i + 3) == val.size() ) ) {
 					if ( this->isValidDigit(val[i + 1]) && this->isValidDigit(val[i + 2]) ) {
 						decimalFlag = true;
 					}
@@ -123,7 +123,7 @@ bool InformationExtractor::isDollarValue(std::string val) {
 				}
 
 				if (val[i] == '.') {
-					if (((i + 1) < val.size()) && ((i + 2) < val.size())) {
+					if ( ( (i + 1) < val.size() ) && ( (i + 2) < val.size() ) && ( (i + 3) == val.size() ) ) {
 						if (this->isValidDigit(val[i + 1]) && this->isValidDigit(val[i + 2])) {
 							decimalFlag = true;
 						}
