@@ -93,24 +93,28 @@ bool InformationExtractor::ExtractTotalSpent(tesseract::ResultIterator *it_) {
 bool InformationExtractor::isDollarValue(std::string val) {
 	int i = 0;
 	bool decimalFlag = false;		//to ensure a number has a decimal value
-	//case 1
+	//case 1. Word starts with dollar sign
 	if ( val[i] == '$' ) {
-		i++;
+		i++;							//ensure characters after dollar sign are valid
 		for (; i < val.size(); i++) {
 			if ( !this->isValidDigit(val[i]) && val[i] != '.') {
 				return false;
 			}
 			
 			if (val[i] == '.') {
-				if (this->isValidDigit(val[i + 1]) || this->isValidDigit(val[i + 2])) {
-					decimalFlag = true;
+				//validate the two following characters. Currency after "." is typically in format ".13", meaning only two digits to represent cents
+				//must also ensure we do not go out of bounds
+				if ( ( (i + 1) < val.size() ) && ( (i + 2) < val.size() ) ) {
+					if ( this->isValidDigit(val[i + 1]) && this->isValidDigit(val[i + 2]) ) {
+						decimalFlag = true;
+					}
 				}
 			}
 		}
 
 		return decimalFlag;
 	}
-	else {
+	else {	//case 2. word starts with digit, has no dollar sign
 		if (this->isValidDigit(val[i]) ) {
 			i++;
 			for (; i < val.size(); i++) {
@@ -119,8 +123,10 @@ bool InformationExtractor::isDollarValue(std::string val) {
 				}
 
 				if (val[i] == '.') {
-					if (this->isValidDigit(val[i + 1]) || this->isValidDigit(val[i + 2])) {
-						decimalFlag = true;
+					if (((i + 1) < val.size()) && ((i + 2) < val.size())) {
+						if (this->isValidDigit(val[i + 1]) && this->isValidDigit(val[i + 2])) {
+							decimalFlag = true;
+						}
 					}
 				}
 			}
