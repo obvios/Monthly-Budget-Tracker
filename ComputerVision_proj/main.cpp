@@ -1,6 +1,10 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 
+//function prototypes
+void resizeFrame(cv::Mat &);
+std::vector<std::vector<cv::Point>> findLargestQuad(std::vector<std::vector<cv::Point>>);
+
 int main(int argc, char * argv[]) {
 	//open camera
 	cv::VideoCapture camera(0);
@@ -21,6 +25,7 @@ int main(int argc, char * argv[]) {
 		camera >> frame;
 
 		//resize frame
+		resizeFrame(frame);
 
 		//apply bilateral filter
 		cv::bilateralFilter(frame, filteredFrame, 9, 75, 75);
@@ -39,12 +44,20 @@ int main(int argc, char * argv[]) {
 		//draw contours only if contours vector is not empty
 
 		//display frame (w/ contours if contours were found)
-
-		//display
+		cv::imshow("edges resized", edges);
 		
 		//exit when user presses quit
 		if (cv::waitKey(1) == 'q') break;
 	}//exit main loop
 
 	return 0;
+}
+
+void resizeFrame(cv::Mat &oFrame) {
+	//calculate scale factor
+	double dx = 700.0 / oFrame.cols;
+	double dy = 700.0 / oFrame.rows;
+
+	//apply new dimensions
+	cv::resize(oFrame, oFrame, cv::Size(), dx, dy);
 }
