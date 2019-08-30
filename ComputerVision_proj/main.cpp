@@ -16,7 +16,7 @@ int main(int argc, char * argv[]) {
 	}
 
 	//main loop
-	for (;;) {
+	while (true) {
 		cv::Mat frame;
 		cv::Mat filteredFrame;
 		cv::Mat edges;
