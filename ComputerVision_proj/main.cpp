@@ -24,10 +24,10 @@ int main(int argc, char * argv[]) {
 
 		//get new frame from camera
 		camera >> frame;
-
+		
 		//resize frame
-		resizeFrame(frame);
-
+		//resizeFrame(frame);
+		
 		//apply bilateral filter
 		cv::bilateralFilter(frame, filteredFrame, 9, 75, 75);
 
@@ -48,7 +48,7 @@ int main(int argc, char * argv[]) {
 			cv::Scalar color(0, 255, 0);
 			cv::drawContours(frame, squareCon, 0, color, 2);
 		}
-
+		
 		//display frame (w/ contours if contours were found)
 		cv::imshow("frame", frame);
 		
