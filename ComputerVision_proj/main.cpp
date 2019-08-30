@@ -30,13 +30,13 @@ int main(int argc, char * argv[]) {
 		
 		//apply bilateral filter
 		cv::bilateralFilter(frame, filteredFrame, 9, 75, 75);
-
+		
 		//grayscale
 		cv::cvtColor(filteredFrame, filteredFrame, cv::COLOR_BGR2GRAY);
 		
 		//perform canny edge detection
 		cv::Canny(filteredFrame, edges, 100, 200);
-		/*
+		
 		//find contours
 		cv::findContours(edges, contours, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
 		
@@ -48,14 +48,14 @@ int main(int argc, char * argv[]) {
 			cv::Scalar color(0, 255, 0);
 			cv::drawContours(frame, squareCon, 0, color, 2);
 		}
-		*/
+		
 		//display frame (w/ contours if contours were found)
 		cv::imshow("frame", frame);
 		
 		//exit main loop when user presses quit
 		if (cv::waitKey(1) == 'q') break;
 	}//exit main loop
-
+	
 	return 0;
 }/***************END MAIN**************/
 
@@ -80,7 +80,8 @@ std::vector<std::vector<cv::Point>> findLargestQuad(std::vector<std::vector<cv::
 	});
 
 	//find quadrilateral
-	for (int i = 0; i < 5; i++) {
+	int i = 0;
+	while (i < 5 && i < conts.size()){
 		std::vector<cv::Point> approx;
 		cv::approxPolyDP(conts[i], approx, (.01 * cv::arcLength(conts[i], true)), true);
 
@@ -88,6 +89,8 @@ std::vector<std::vector<cv::Point>> findLargestQuad(std::vector<std::vector<cv::
 			returnVect.push_back(approx);
 			return returnVect;
 		}
+
+		i++;
 	}
 
 	//nothing was found if we reach this far
