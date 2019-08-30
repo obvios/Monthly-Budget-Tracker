@@ -26,20 +26,20 @@ int main(int argc, char * argv[]) {
 		camera >> frame;
 		
 		//resize frame
-		//resizeFrame(frame);
+		resizeFrame(frame);
 		
 		//apply bilateral filter
 		cv::bilateralFilter(frame, filteredFrame, 9, 75, 75);
 
 		//grayscale
 		cv::cvtColor(filteredFrame, filteredFrame, cv::COLOR_BGR2GRAY);
-
+		
 		//perform canny edge detection
 		cv::Canny(filteredFrame, edges, 100, 200);
-
+		/*
 		//find contours
 		cv::findContours(edges, contours, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
-
+		
 		//find quadrilateral contours. Example: contours[0][0].x
 		std::vector<std::vector<cv::Point>> squareCon = findLargestQuad(contours);
 		
@@ -48,7 +48,7 @@ int main(int argc, char * argv[]) {
 			cv::Scalar color(0, 255, 0);
 			cv::drawContours(frame, squareCon, 0, color, 2);
 		}
-		
+		*/
 		//display frame (w/ contours if contours were found)
 		cv::imshow("frame", frame);
 		
@@ -80,9 +80,9 @@ std::vector<std::vector<cv::Point>> findLargestQuad(std::vector<std::vector<cv::
 	});
 
 	//find quadrilateral
-	for (std::vector<cv::Point> cont : conts) {
+	for (int i = 0; i < 5; i++) {
 		std::vector<cv::Point> approx;
-		cv::approxPolyDP(cont, approx, (.01 * cv::arcLength(cont, true)), true);
+		cv::approxPolyDP(conts[i], approx, (.01 * cv::arcLength(conts[i], true)), true);
 
 		if (approx.size() == 4) {
 			returnVect.push_back(approx);
