@@ -29,7 +29,7 @@ int main(int argc, char * argv[]) {
 		resizeFrame(frame);
 		
 		//apply bilateral filter
-		cv::bilateralFilter(frame, filteredFrame, 9, 75, 75);
+		cv::bilateralFilter(frame, filteredFrame, 5, 75, 75);
 		
 		//grayscale
 		cv::cvtColor(filteredFrame, filteredFrame, cv::COLOR_BGR2GRAY);
