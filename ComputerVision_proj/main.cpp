@@ -4,6 +4,8 @@
 //function prototypes
 void resizeFrame(cv::Mat &);
 std::vector<std::vector<cv::Point>> findLargestQuad(std::vector<std::vector<cv::Point>>&);
+std::vector<cv::Point> sortBy_Xcoordinate(std::vector<std::vector<cv::Point>>&);
+void sortCoordinates(std::vector<cv::Point>&);
 
 /*************** MAIN **********************/
 int main(int argc, char * argv[]) {
@@ -14,6 +16,9 @@ int main(int argc, char * argv[]) {
 	if (!camera.isOpened()) {
 		return -1;
 	}
+
+	//holds selected quadrilateral contour
+	std::vector<std::vector<cv::Point>> finalContour;
 
 	//main loop
 	while (true) {
@@ -53,8 +58,28 @@ int main(int argc, char * argv[]) {
 		cv::imshow("frame", frame);
 		
 		//exit main loop when user presses quit
-		if (cv::waitKey(1) == 'q') break;
+		if (cv::waitKey(1) == 'q') {
+			if (squareCon.size() != 0) { finalContour = squareCon; }
+			break;
+		}
 	}//exit main loop
+	
+	//only performs projection if contours were found
+	if (finalContour.size() != 0) {
+		//sort corners of bounding box
+		std::vector<cv::Point> sortedPoints = sortBy_Xcoordinate(finalContour);
+		sortCoordinates(sortedPoints);
+
+		//create source points
+		std::vector<cv::Point2f> src_pts;
+		cv::Mat(sortedPoints).copyTo(src_pts);
+
+		//create destination points
+		std::vector<cv::Point2f> dst_pts = {cv::Point2f(0.0,0.0), cv::Point2f(0.0,700.0), cv::Point2f(700.0,700.0), cv::Point2f(700.0,0.0) };
+
+		//find homography matrix
+		cv::Mat hom = cv::findHomography(src_pts, dst_pts);
+	}
 	
 	return 0;
 }/***************END MAIN**************/
@@ -95,4 +120,34 @@ std::vector<std::vector<cv::Point>> findLargestQuad(std::vector<std::vector<cv::
 
 	//nothing was found if we reach this far
 	return returnVect;
+}
+
+//sorts an arraOfarray holding Points by x-coordinates
+//returns an array of Points sorted by x-coordinates
+std::vector<cv::Point> sortBy_Xcoordinate(std::vector<std::vector<cv::Point>>& contArrayOfArray) {
+	std::vector<cv::Point> contArray = { cv::Point(0,0), cv::Point(0,0), cv::Point(0,0), cv::Point(0,0) };
+
+	for (int i = 0; i < 4; i++) {
+		cv::Point point = contArrayOfArray[0][i]; 
+		contArray[i] = point;
+	}
+
+	//sort by x-coordinate
+	std::sort(contArray.begin(), contArray.end(), [](const cv::Point& p1, const cv::Point& p2) {
+		return p1.x < p2.x;
+	});
+
+	return contArray;
+}
+
+//sort points in following order: top-left, bottom-left, bottom-right, top-right
+//parameter must be sorted by x-coordinate value
+void sortCoordinates(std::vector<cv::Point>& x_sortedCont) {
+	std::sort(x_sortedCont.begin(), x_sortedCont.begin() + 1, [](const cv::Point& p1, const cv::Point& p2) {
+		return p1.y < p2.y;
+	});
+
+	std::sort(x_sortedCont.begin() + 2, x_sortedCont.begin() + 3, [](const cv::Point& p1, const cv::Point& p2) {
+		return p1.y > p2.y;
+	});
 }
