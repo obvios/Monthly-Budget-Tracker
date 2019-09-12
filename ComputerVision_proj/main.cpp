@@ -19,8 +19,11 @@ int main(int argc, char * argv[]) {
 
 	//holds selected quadrilateral contour
 	std::vector<std::vector<cv::Point>> finalContour;
+	//holds last frame
+	cv::Mat frameCopy;
 
 	//main loop
+	//this whole loop may potentially be replaced by IOS VISION
 	while (true) {
 		cv::Mat frame;
 		cv::Mat filteredFrame;
@@ -60,6 +63,8 @@ int main(int argc, char * argv[]) {
 		//exit main loop when user presses quit
 		if (cv::waitKey(1) == 'q') {
 			if (squareCon.size() != 0) { finalContour = squareCon; }
+			//copy frame
+			frame.copyTo(frameCopy);
 			break;
 		}
 	}//exit main loop
@@ -71,16 +76,27 @@ int main(int argc, char * argv[]) {
 		sortCoordinates(sortedPoints);
 
 		//create source points
-		std::vector<cv::Point2f> src_pts;
-		cv::Mat(sortedPoints).copyTo(src_pts);
+		std::vector<cv::Point2f> src_pts = {sortedPoints[0], sortedPoints[1], sortedPoints[2], sortedPoints[3]};
+		//cv::Mat(sortedPoints).copyTo(src_pts);
 
 		//create destination points
 		std::vector<cv::Point2f> dst_pts = {cv::Point2f(0.0,0.0), cv::Point2f(0.0,700.0), cv::Point2f(700.0,700.0), cv::Point2f(700.0,0.0) };
 
 		//find homography matrix
 		cv::Mat hom = cv::findHomography(src_pts, dst_pts);
+
+		//perform warpPerspective
+		cv::Mat finalImage;
+		cv::warpPerspective(frameCopy, finalImage, hom, cv::Size( cvRound(dst_pts[3].x), cvRound(dst_pts[3].y) ) );
+
+		//display final image
+		cv::imshow("final image", finalImage);
+		cv::waitKey(0);
 	}
 	
+	//release memory
+	camera.release();
+	cv::destroyAllWindows();
 	return 0;
 }/***************END MAIN**************/
 
@@ -143,11 +159,22 @@ std::vector<cv::Point> sortBy_Xcoordinate(std::vector<std::vector<cv::Point>>& c
 //sort points in following order: top-left, bottom-left, bottom-right, top-right
 //parameter must be sorted by x-coordinate value
 void sortCoordinates(std::vector<cv::Point>& x_sortedCont) {
-	std::sort(x_sortedCont.begin(), x_sortedCont.begin() + 1, [](const cv::Point& p1, const cv::Point& p2) {
-		return p1.y < p2.y;
-	});
+	int y1 = x_sortedCont[0].y;
+	int y2 = x_sortedCont[1].y;
 
-	std::sort(x_sortedCont.begin() + 2, x_sortedCont.begin() + 3, [](const cv::Point& p1, const cv::Point& p2) {
-		return p1.y > p2.y;
-	});
+	if (y2 < y1) {
+		//swap
+		cv::Point temp(x_sortedCont[0].x, x_sortedCont[0].y);	//copy first point
+		x_sortedCont[0] = x_sortedCont[1];
+		x_sortedCont[1] = temp;
+	}
+
+	int y3 = x_sortedCont[2].y;
+	int y4 = x_sortedCont[3].y;
+
+	if (y4 > y3) {
+		cv::Point temp(x_sortedCont[2].x, x_sortedCont[2].y);	//copy third point
+		x_sortedCont[2] = x_sortedCont[3];
+		x_sortedCont[3] = temp;
+	}
 }
