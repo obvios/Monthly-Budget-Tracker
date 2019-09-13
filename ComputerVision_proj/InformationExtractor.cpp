@@ -33,9 +33,10 @@ bool InformationExtractor::Init(const char * datapath, const char * language) {
 
 //Extracts the text from receipt image.
 //sets TextExtracted to true if successful.
-bool InformationExtractor::ExtractText(char const * fileName) {
+bool InformationExtractor::ExtractText(unsigned char const * fileName) {
 	//change to get tiff image from buffer
-	auto pixs = pixRead(fileName);
+	auto pixs = pixReadMem(fileName, sizeof(fileName));
+
 	if (!pixs)
 	{
 		std::cout << "Cannot open input file: " << fileName << std::endl;
