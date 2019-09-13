@@ -1,5 +1,7 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
+#include "Tess/InformationExtractor.h"
+
 
 //function prototypes
 void resizeFrame(cv::Mat &);
@@ -97,6 +99,11 @@ int main(int argc, char * argv[]) {
 	//release memory
 	camera.release();
 	cv::destroyAllWindows();
+
+	//save image to buffer as tiff
+
+	//process image with tesseract
+
 	return 0;
 }/***************END MAIN**************/
 
