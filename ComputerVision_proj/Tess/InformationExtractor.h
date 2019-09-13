@@ -18,7 +18,7 @@ public:
 	InformationExtractor();
 	~InformationExtractor();
 	bool Init(const char* datapath = "./tessdata", const char* language = "eng");
-	//change to get tiff image from buffer
+	//change to get tiff image from buffer.
 	bool ExtractText(char const *);
 	double GetTotalValue();
 
