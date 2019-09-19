@@ -33,19 +33,9 @@ bool InformationExtractor::Init(const char * datapath, const char * language) {
 
 //Extracts the text from receipt image.
 //sets TextExtracted to true if successful.
-bool InformationExtractor::ExtractText(unsigned char const * fileName) {
-	//change to get tiff image from buffer
-	auto pixs = pixReadMem(fileName, sizeof(fileName));
-
-	if (!pixs)
-	{
-		std::cout << "Cannot open input file: " << fileName << std::endl;
-		std::cin.get();
-		return false;
-	}
-
+bool InformationExtractor::ExtractText(unsigned char const * cvImage, int width, int height, int bytesPerPix, int cols) {
 	// recognize
-	this->tess.SetImage(pixs);
+	this->tess.SetImage(cvImage, width, height, bytesPerPix, cols);
 	this->tess.Recognize(0);
 
 	//assert text extracted
@@ -59,7 +49,6 @@ bool InformationExtractor::ExtractText(unsigned char const * fileName) {
 
 	//clean up
 	tess.Clear();
-	pixDestroy(&pixs);
 	delete tessIt_;
 
 	return true;
@@ -73,7 +62,7 @@ bool InformationExtractor::ExtractTotalSpent(tesseract::ResultIterator *it_) {
 	if (this->TextExtracted) {
 		while (it_->Next(tesseract::RIL_WORD)) {
 			std::string line(it_->GetUTF8Text(tesseract::RIL_WORD));
-			//analyze word
+			//analyze word 
 			if (this->isDollarValue(line)) {
 				std::cout << line << std::endl;
 			}

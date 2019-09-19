@@ -23,6 +23,9 @@ int main(int argc, char * argv[]) {
 	std::vector<std::vector<cv::Point>> finalContour;
 	//holds last frame
 	cv::Mat frameCopy;
+	//tesseract
+	InformationExtractor infoExtractor;
+	infoExtractor.Init("Tess/tessdata", "eng");
 
 	//main loop
 	//this whole loop may potentially be replaced by IOS VISION
@@ -71,7 +74,7 @@ int main(int argc, char * argv[]) {
 		}
 	}//exit main loop
 	
-	//only performs projection if contours were found
+	//only performs projection and OCR if contours were found
 	if (finalContour.size() != 0) {
 		//sort corners of bounding box
 		std::vector<cv::Point> sortedPoints = sortBy_Xcoordinate(finalContour);
@@ -91,18 +94,25 @@ int main(int argc, char * argv[]) {
 		cv::Mat finalImage;
 		cv::warpPerspective(frameCopy, finalImage, hom, cv::Size( cvRound(dst_pts[3].x), cvRound(dst_pts[3].y) ) );
 
+		//process final image for better ocr recognition
+		cv::cvtColor(finalImage, finalImage, cv::COLOR_BGR2GRAY);
+		cv::threshold(finalImage, finalImage, 150, 255, cv::THRESH_BINARY);
+
 		//display final image
 		cv::imshow("final image", finalImage);
 		cv::waitKey(0);
+
+
+		//process image with tesseract
+		infoExtractor.ExtractText((uchar*)finalImage.data, finalImage.cols, finalImage.rows, 1, finalImage.cols);
+
+		//pause
+		std::cin.get();
 	}
 	
 	//release memory
 	camera.release();
 	cv::destroyAllWindows();
-
-	//save image to buffer as tiff
-
-	//process image with tesseract
 
 	return 0;
 }/***************END MAIN**************/

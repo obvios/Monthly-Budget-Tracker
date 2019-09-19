@@ -18,8 +18,8 @@ public:
 	InformationExtractor();
 	~InformationExtractor();
 	bool Init(const char* datapath = "./tessdata", const char* language = "eng");
-	//change to get tiff image from buffer.
-	bool ExtractText( unsigned char const *);
+	//change to get image from opencv
+	bool ExtractText( unsigned char const *, int width, int height, int bytesPerPix, int cols);
 	double GetTotalValue();
 
 private:
