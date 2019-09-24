@@ -27,7 +27,7 @@ int main(int argc, char * argv[]) {
 	InformationExtractor infoExtractor;
 	infoExtractor.Init("Tess/tessdata", "eng");
 
-	//main loop
+	/*main loop*/
 	//this whole loop may potentially be replaced by IOS VISION
 	while (true) {
 		cv::Mat frame;
@@ -72,9 +72,9 @@ int main(int argc, char * argv[]) {
 			frame.copyTo(frameCopy);
 			break;
 		}
-	}//exit main loop
+	}/*exit main loop*/
 	
-	//only performs projection and OCR if contours were found
+	/*only performs projection and OCR if contours were found*/
 	if (finalContour.size() != 0) {
 		//sort corners of bounding box
 		std::vector<cv::Point> sortedPoints = sortBy_Xcoordinate(finalContour);
