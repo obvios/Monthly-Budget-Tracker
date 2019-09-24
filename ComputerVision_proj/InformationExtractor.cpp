@@ -85,7 +85,8 @@ bool InformationExtractor::isDollarValue(std::string val) {
 	bool decimalFlag = false;		//to ensure a number has a decimal value
 	//case 1. Word starts with dollar sign
 	if ( val[i] == '$' ) {
-		i++;							//ensure characters after dollar sign are valid
+		if(i + 1 < val.size()){ i++; }
+		//ensure characters after dollar sign are valid
 		for (; i < val.size(); i++) {
 			if ( !this->isValidDigit(val[i]) && val[i] != '.') {
 				return false;
@@ -106,7 +107,7 @@ bool InformationExtractor::isDollarValue(std::string val) {
 	}
 	else {	//case 2. word starts with digit, has no dollar sign
 		if (this->isValidDigit(val[i]) ) {
-			i++;
+			if (i + 1 < val.size()) { i++; }
 			for (; i < val.size(); i++) {
 				if (!this->isValidDigit(val[i]) && val[i] != '.') {
 					return false;

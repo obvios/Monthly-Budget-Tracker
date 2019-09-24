@@ -82,7 +82,6 @@ int main(int argc, char * argv[]) {
 
 		//create source points
 		std::vector<cv::Point2f> src_pts = {sortedPoints[0], sortedPoints[1], sortedPoints[2], sortedPoints[3]};
-		//cv::Mat(sortedPoints).copyTo(src_pts);
 
 		//create destination points
 		std::vector<cv::Point2f> dst_pts = {cv::Point2f(0.0,0.0), cv::Point2f(0.0,700.0), cv::Point2f(700.0,700.0), cv::Point2f(700.0,0.0) };
