@@ -17,7 +17,7 @@ BudgetDocument::BudgetDocument(std::string dir, std::string fileName) {
 //the file, storing the data in Month struct. If file does not exist, it creates one with the 
 //proper layout, initializing each month's total to zero. 
 //Examples of line: "January:-34.89" , "February:+41.99"
-bool BudgetDocument::Init() {
+bool BudgetDocument::ReadDocument() {
 	std::cout << fileDirectory + fileName << std::endl;
 	std::ifstream budgTxtFile(fileDirectory + fileName);
 

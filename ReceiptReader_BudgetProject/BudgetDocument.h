@@ -26,7 +26,7 @@ private:
 public:
 	BudgetDocument(std::string, std::string);
 	~BudgetDocument();
-	bool Init();
+	bool ReadDocument();
 	bool WriteToFile(Month);
 };
 
