@@ -21,9 +21,15 @@
     <ClCompile Include="InformationExtractor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BudgetDocument.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tess\InformationExtractor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BudgetDocument.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
