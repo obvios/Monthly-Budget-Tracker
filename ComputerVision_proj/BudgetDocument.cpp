@@ -16,17 +16,16 @@ BudgetDocument::BudgetDocument() {
 
 	if (directoryCreated) {
 		//now create txt file
-		std::cout << "directory created\n";
 		std::ofstream file;
 		file.open(this->fileDirectory + this->fileName);
 		file.close();
-		//initialize document
 
+		//initialize document
+		this->CreateDocument();
 	}
 	else {
 		//file and directory already exist
 		//read them in
-		std::cout << "not created\n";
 		this->ReadDocument();
 	}
 }
@@ -38,15 +37,20 @@ bool BudgetDocument::CreateDocument() {
 
 	if (file.is_open()) {
 		//format file
+		std::vector<std::string> months = {"January", "February", "March", "April", "May", "June", "July",
+											"August", "September", "October", "November", "December"};
 
+		for (std::string month : months) {
+			file << month + ":+0.0\n";
+		}
+
+		//close file
+		file.close();
+		return true;
 	}
 	else {
 		return false;
 	}
-	
-
-	//close file
-	file.close();
 }
 
 //If file exists, this function reads in the months and their totals from 
