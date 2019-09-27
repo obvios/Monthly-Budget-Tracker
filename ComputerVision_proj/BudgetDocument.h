@@ -7,6 +7,8 @@
 #define BUDGETDOCUMENT_H
 #include <iostream>
 #include <map>
+#include <filesystem>
+namespace fs = std::experimental::filesystem;
 
 //Holds all the data related to the budget for a given month
 struct Month
@@ -19,15 +21,15 @@ struct Month
 class BudgetDocument
 {
 private:
-	BudgetDocument();			//no default, must have a text file
-	std::string fileDirectory;
-	std::string fileName;
+	std::string fileDirectory = "C:\\Users\\Eric\\Documents\\Development\\TesseractProject\\ReceiptReaderProject\\Financial";
+	std::string fileName = "\\Budget.txt";
 	std::map < std::string, Month*> months;
+	bool ReadDocument();
+	bool CreateDocument();
 public:
-	BudgetDocument(std::string, std::string);
+	BudgetDocument();
 	~BudgetDocument();
-	bool Init();
-	bool WriteToFile(Month);
+	bool WriteToFile(std::string month, double val);
 };
 
 #endif

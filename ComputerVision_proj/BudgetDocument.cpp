@@ -6,20 +6,55 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <filesystem>
 
-//constructor
-BudgetDocument::BudgetDocument(std::string dir, std::string fileName) {
-	this->fileDirectory = dir;
-	this->fileName = fileName;
+//default constructor
+//creates directory and file for storing data
+BudgetDocument::BudgetDocument() {
+	//create directory for data
+	bool directoryCreated = fs::create_directory(this->fileDirectory);
+
+	if (directoryCreated) {
+		//now create txt file
+		std::cout << "directory created\n";
+		std::ofstream file;
+		file.open(this->fileDirectory + this->fileName);
+		file.close();
+		//initialize document
+
+	}
+	else {
+		//file and directory already exist
+		//read them in
+		std::cout << "not created\n";
+		this->ReadDocument();
+	}
+}
+
+//Responsible for formatting the initial budget document
+bool BudgetDocument::CreateDocument() {
+	//open file
+	std::ofstream file(this->fileDirectory + this->fileName);
+
+	if (file.is_open()) {
+		//format file
+
+	}
+	else {
+		return false;
+	}
+	
+
+	//close file
+	file.close();
 }
 
 //If file exists, this function reads in the months and their totals from 
 //the file, storing the data in Month struct. If file does not exist, it creates one with the 
 //proper layout, initializing each month's total to zero. 
 //Examples of line: "January:-34.89" , "February:+41.99"
-bool BudgetDocument::Init() {
-	std::cout << fileDirectory + fileName << std::endl;
-	std::ifstream budgTxtFile(fileDirectory + fileName);
+bool BudgetDocument::ReadDocument() {
+	std::ifstream budgTxtFile(this->fileDirectory + this->fileName);
 
 	//attempt to open budget file
 	if (budgTxtFile.is_open())
