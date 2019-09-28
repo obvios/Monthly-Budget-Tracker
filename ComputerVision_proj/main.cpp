@@ -1,6 +1,7 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include "Tess/InformationExtractor.h"
+#include "BudgetDocument.h"
 
 
 //function prototypes
@@ -11,6 +12,8 @@ void sortCoordinates(std::vector<cv::Point>&);
 
 /*************** MAIN **********************/
 int main(int argc, char * argv[]) {
+	///////////testtttttttt
+	BudgetDocument bd;
 	//open camera
 	cv::VideoCapture camera(0);
 
