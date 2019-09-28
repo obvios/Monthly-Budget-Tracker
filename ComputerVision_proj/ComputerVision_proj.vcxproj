@@ -121,7 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BudgetDocument.h" />
-    <ClInclude Include="Tess\InformationExtractor.h" />
+    <ClInclude Include="InformationExtractor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

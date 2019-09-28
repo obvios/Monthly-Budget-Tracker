@@ -26,10 +26,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Tess\InformationExtractor.h">
+    <ClInclude Include="BudgetDocument.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BudgetDocument.h">
+    <ClInclude Include="InformationExtractor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
