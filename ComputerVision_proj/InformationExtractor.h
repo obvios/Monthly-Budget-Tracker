@@ -20,7 +20,6 @@ public:
 	bool Init(const char* datapath = "./Tess/tessdata", const char* language = "eng");
 	//change to get image from opencv
 	bool ExtractText( unsigned char const *, int width, int height, int bytesPerPix, int cols);
-	double GetTotalValue();
 
 private:
 	double TotalValue = 0.0;
