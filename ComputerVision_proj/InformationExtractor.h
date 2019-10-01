@@ -31,7 +31,7 @@ private:
 	bool isValidDigit(char);
 	bool isDollarValue(std::string);
 	double dollarVal_TO_doubleVal(std::string);
-	bool ExtractTotalSpent(tesseract::ResultIterator *it_);
+	bool ExtractDollarValues(tesseract::ResultIterator *it_);
 };
 
 #endif 

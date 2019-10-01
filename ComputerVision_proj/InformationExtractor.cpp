@@ -45,7 +45,7 @@ bool InformationExtractor::ExtractTotal(unsigned char const * cvImage, int width
 	tesseract::ResultIterator * tessIt_ = tess.GetIterator();
 
 	//call ExtractTotalSpent
-	this->ExtractTotalSpent(tessIt_);
+	this->ExtractDollarValues(tessIt_);
 
 	//clean up
 	tess.Clear();
@@ -58,7 +58,7 @@ bool InformationExtractor::ExtractTotal(unsigned char const * cvImage, int width
 //receipt image and adds it to TotalValue. Only works if TextExtracted is true.
 //Resets TextExtracted to False.
 ///hasss tteessstttiinngggg
-bool InformationExtractor::ExtractTotalSpent(tesseract::ResultIterator *it_) {
+bool InformationExtractor::ExtractDollarValues(tesseract::ResultIterator *it_) {
 	if (this->TextExtracted) {
 		while (it_->Next(tesseract::RIL_WORD)) {
 			std::string line(it_->GetUTF8Text(tesseract::RIL_WORD));
