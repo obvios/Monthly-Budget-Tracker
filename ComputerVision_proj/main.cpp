@@ -106,7 +106,7 @@ int main(int argc, char * argv[]) {
 
 
 		//process image with tesseract
-		infoExtractor.ExtractText((uchar*)finalImage.data, finalImage.cols, finalImage.rows, 1, finalImage.cols);
+		infoExtractor.ExtractTotal((uchar*)finalImage.data, finalImage.cols, finalImage.rows, 1, finalImage.cols);
 
 		//pause
 		std::cin.get();

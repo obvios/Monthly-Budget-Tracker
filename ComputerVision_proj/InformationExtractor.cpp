@@ -33,7 +33,7 @@ bool InformationExtractor::Init(const char * datapath, const char * language) {
 
 //Extracts the text from receipt image.
 //sets TextExtracted to true if successful.
-bool InformationExtractor::ExtractText(unsigned char const * cvImage, int width, int height, int bytesPerPix, int cols) {
+bool InformationExtractor::ExtractTotal(unsigned char const * cvImage, int width, int height, int bytesPerPix, int cols) {
 	// recognize
 	this->tess.SetImage(cvImage, width, height, bytesPerPix, cols);
 	this->tess.Recognize(0);
