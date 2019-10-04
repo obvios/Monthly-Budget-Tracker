@@ -1,6 +1,6 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include "Tess/InformationExtractor.h"
+#include "InformationExtractor.h"
 #include "BudgetDocument.h"
 
 
@@ -12,8 +12,6 @@ void sortCoordinates(std::vector<cv::Point>&);
 
 /*************** MAIN **********************/
 int main(int argc, char * argv[]) {
-	///////////testtttttttt
-	BudgetDocument bd;
 	//open camera
 	cv::VideoCapture camera(0);
 
@@ -24,8 +22,10 @@ int main(int argc, char * argv[]) {
 
 	//holds selected quadrilateral contour
 	std::vector<std::vector<cv::Point>> finalContour;
+
 	//holds last frame
 	cv::Mat frameCopy;
+
 	//tesseract
 	InformationExtractor infoExtractor;
 	infoExtractor.Init("Tess/tessdata", "eng");
@@ -104,9 +104,10 @@ int main(int argc, char * argv[]) {
 		cv::imshow("final image", finalImage);
 		cv::waitKey(0);
 
-
-		//process image with tesseract
-		infoExtractor.ExtractTotal((uchar*)finalImage.data, finalImage.cols, finalImage.rows, 1, finalImage.cols);
+		//process image with tesseract and get Total
+		if (infoExtractor.ExtractTotal((uchar*)finalImage.data, finalImage.cols, finalImage.rows, 1, finalImage.cols)) {
+			//write total to budget document
+		}
 
 		//pause
 		std::cin.get();
