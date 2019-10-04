@@ -20,18 +20,18 @@ public:
 	bool Init(const char* datapath = "./Tess/tessdata", const char* language = "eng");
 	//change to get image from opencv
 	bool ExtractTotal( unsigned char const *, int width, int height, int bytesPerPix, int cols);
+	double GetTotalValue();
 
 private:
 	double TotalValue = 0.0;
 	bool TextExtracted = false;
 	tesseract::TessBaseAPI tess;
-	//vector to hold all dollar values extracted from text
-	std::vector<double>dollarValuesExtracted;
 	//private methods used to extract total from receipt
 	bool isValidDigit(char);
 	bool isDollarValue(std::string);
 	double dollarVal_TO_doubleVal(std::string);
-	bool ExtractDollarValues(tesseract::ResultIterator *it_);
+	double FindTotal(std::vector<double>);
+	std::vector<double> ExtractDollarValues(tesseract::ResultIterator *it_);
 };
 
 #endif 
