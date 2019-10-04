@@ -183,8 +183,8 @@ double InformationExtractor::FindTotal(std::vector<double> vals)
 	std::vector<double>::iterator it_ = std::max_element(vals.begin(), vals.end());
 	double subTotal = *it_;
 
-	//check if any number after it equals subTotal - taxes, meaning it would be the true total
-	if (it_ != vals.end()) {
+	//check if any number after it equals subTotal - discount, meaning it would be the true total
+	if (it_ != (vals.end() - 1) ) {
 		it_++;
 	}
 	else {
