@@ -117,6 +117,33 @@ bool BudgetDocument::ReadDocument() {
 	}
 }
 
+//
+bool BudgetDocument::WriteToFile(std::string month, double val)
+{
+	this->months.at(month)->total -= val;
+	std::ofstream file(this->fileDirectory + this->fileName);
+
+	if (file.is_open()) {
+		std::vector<std::string> monthList = { "January", "February", "March", "April", "May", "June", "July",
+											"August", "September", "October", "November", "December" };
+		for (std::string mon : monthList) {
+			std::string valToWrite = "";
+			double monthVal = this->months.at(mon)->total;
+			if (monthVal < 0) {
+				valToWrite = "-" + std::to_string(-1.0 * monthVal);
+			}
+			else {
+				valToWrite = std::to_string(monthVal);
+			}
+			file << mon + ":" + valToWrite + "\n";
+		}
+		file.close();
+		return true;
+	}
+
+	return false;
+}
+
 //iterates through months map and deletes all allocated memory
 BudgetDocument::~BudgetDocument()
 {
