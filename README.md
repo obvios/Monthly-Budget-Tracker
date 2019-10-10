@@ -12,12 +12,12 @@ To simplify tracking how much you spend and earn in a month, giving you an insta
 * Currently, only manual input of income is supported. Soon you will be able to can scan your checks :)
 
 ## Example images from program
-<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/ExampleData.jpg" width="200" height="250">  Sample Data
+<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/ExampleData.jpg" width="300" height="350">  Sample Data
 
-<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/Detection.jpg" width="200" height="250">  Detection of document
+<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/Detection.jpg" width="300" height="350">  Detection of document
 
-<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/PostProcessing.jpg" width="200" height="250"> Post-processing of image
+<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/PostProcessing.jpg" width="300" height="350"> Post-processing of image
 
-<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/TotalExtracted.jpg" width="200" height="250"> The total extrcted from capture
+<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/TotalExtracted.jpg" width="300" height="350"> The total extrcted from capture
 
-<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/BudgetDoc.jpg" width="200" height="250">  Updated Budget document after reading receipt with webcam multiple times and allowing user to select month to update
+<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/BudgetDoc.jpg" width="300" height="350">  Updated Budget document after reading receipt with webcam multiple times and allowing user to select month to update
