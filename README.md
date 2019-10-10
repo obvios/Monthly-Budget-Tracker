@@ -1,7 +1,7 @@
 # Monthly-Budget-Tracker
 
 ## Purpose
-To simplify keeping track of how much you spend and earn in a month, giving you an instant net view of your monthly budget.
+To simplify tracking how much you spend and earn in a month, giving you an instant net view of your monthly budget.
 
 ## How does it work?
 ### Subtracting Expenses
