@@ -10,3 +10,6 @@ To simplify tracking how much you spend and earn in a month, giving you an insta
 
 ### Adding income
 * Currently, only manual input of income is supported. Soon you will be able to can scan your checks :)
+
+## Example images from program
+![Example Data] (ComputerVision_proj/Images/ExampleData.JPG)
