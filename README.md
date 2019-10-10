@@ -18,6 +18,6 @@ To simplify tracking how much you spend and earn in a month, giving you an insta
 
 <img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/PostProcessing.jpg" width="300" height="350"> Post-processing of image
 
-<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/TotalExtracted.jpg" width="300" height="350"> The total extracted from capture (19.08)
+<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/TotalExtracted2.jpg" width="300" height="350"> The total extracted from capture (19.08)
 
 <img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/BudgetDoc.jpg" width="300" height="350">  Updated Budget document after reading receipt with webcam multiple times and allowing user to select month to update
