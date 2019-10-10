@@ -110,7 +110,11 @@ int main(int argc, char * argv[]) {
 		//process image with tesseract and get Total
 		if (infoExtractor.ExtractTotal((uchar*)finalImage.data, finalImage.cols, finalImage.rows, 1, finalImage.cols)) {
 			//write total to budget document
-			budgetDoc.WriteToFile("January", infoExtractor.GetTotalValue());
+			std::string month;
+			std::cout << "Which month?\nEnter Month: ";
+			std::cin >> month;
+
+			budgetDoc.WriteToFile(month, infoExtractor.GetTotalValue());
 		}
 
 		//pause
