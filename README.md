@@ -12,11 +12,9 @@ To simplify tracking how much you spend and earn in a month, giving you an insta
 * Currently, only manual input of income is supported. Soon you will be able to can scan your checks :)
 
 ## Example images from program
-<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/ExampleData.jpg" width="200" height="250">
-Sample Data
+<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/ExampleData.jpg" width="200" height="250">Sample Data
 
-<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/Detection.jpg" width="200" height="250">
-Detection of document
+<img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/Detection.jpg" width="200" height="250">Detection of document
 
 <img src="https://github.com/obvios/Monthly-Budget-Tracker/blob/master/ComputerVision_proj/Images/PostProcessing.jpg" width="200" height="250">
 Post-processing of image
